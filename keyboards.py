@@ -1,9 +1,10 @@
 from aiogram.types import ReplyKeyboardMarkup, KeyboardButton, InlineKeyboardMarkup, InlineKeyboardButton
 
-b1 = KeyboardButton('/распознать_объекты')
-b2 = KeyboardButton('/сгенерировать_qr_код')
-b3 = KeyboardButton('/сгенерировать_текст')
+b1 = KeyboardButton('/Распознать_объекты')
+b2 = KeyboardButton('/Сгенерировать_QR_код')
+b3 = KeyboardButton('/Cгенерировать_текст')
 
-kb = ReplyKeyboardMarkup(resize_keyboard=True)
-kb.add(b1, b2, b3)
+kb = ReplyKeyboardMarkup(resize_keyboard=False)
+kb.add(b1).add(b2).add(b3)
+
 

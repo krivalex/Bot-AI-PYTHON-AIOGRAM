@@ -40,17 +40,17 @@ import logging
 logging.basicConfig(level=logging.INFO)
 
 # Start command handler
-@dp.message_handler(commands=['start'])
+@dp.message_handler(commands=['start', 'help'])
 async def send_welcome(message: types.Message):
     await bot.send_message(chat_id = message.from_user.id,
-     text = "Привет, этого бота мы написали специально для пробных уроков, и для того чтобы сдать ресерч Кириллу, и сходить с ним в бар",
+     text = "Добро пожаловать в Atmosphere AI - это бот с исскуственным интеллектом, который может помочь тебе в различных задачах. \n\n",
       reply_markup=kb)
 
 
 
 
 # Object detection handler
-@dp.message_handler(commands=['распознать_объекты'])
+@dp.message_handler(commands=['Распознать_объекты'])
 async def object_handler(message: types.Message, state: FSMContext):
     await message.reply("Отправь мне фото, и найду на нем объекты")
     await Object.want.set()
@@ -77,9 +77,9 @@ async def object_photo_callback(callback: types.Message, state: FSMContext):
 
 
 # QR code handler
-@dp.message_handler(commands=['сгенерировать_qr_код'])
+@dp.message_handler(commands=['Сгенерировать_QR_код'])
 async def qr_code_handler(message: types.Message, state: FSMContext):
-    await message.reply("Отправь мне ссылку, и я сгенерирую qr код")
+    await message.reply("Отправь мне ссылку, и я сгенерирую QR код")
     await QR.want.set()
     async with state.proxy() as data:
         data['want'] = message.text
@@ -100,10 +100,10 @@ async def qr_code_callback(message: types.Message, state: FSMContext):
     await state.finish()
 
 # Text generation handler
-@dp.message_handler(commands=['сгенерировать_текст'])
+@dp.message_handler(commands=['Cгенерировать_текст'])
 async def text_handler(message: types.Message, state: FSMContext):
     await message.reply("Отправь мне пару слов, и попрошу Шекспира написать что-то похожее")
-    await message.reply("ВАЖНО: Шекспир пишет только на английском языке, и он ждет от тебя не более слова на английском языке")
+    await message.reply("ВАЖНО: Шекспир пишет только на английском языке, и он ждет от тебя не более 10 слов на английском языке")
     await Text.want.set()
     async with state.proxy() as data:
         data['want'] = message.text
